@@ -30,6 +30,8 @@ iverilog -o result rtl/sync_fifo_8x32.v tb/sync_fifo_8x32_tb.v
 vvp result
 
 # 3. View the generated waveform
+
+```bash
 | File Path                  | Description                                               |
 | -------------------------- | --------------------------------------------------------- |
 | `rtl/sync_fifo_8x32.v`     | The Verilog RTL design file for the FIFO.                 |
@@ -52,3 +54,5 @@ Simultaneous R/W Test: Runs a loop of simultaneous reads and writes to test data
 | **GTKWave**        | Viewing the output waveforms (`.vcd`) for visual analysis. |
 
 gtkwave sync_fifo_8x32.vcd
+
+
