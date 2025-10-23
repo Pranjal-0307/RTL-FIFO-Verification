@@ -1,62 +1,69 @@
-# 💾 Verilog Synchronous FIFO (8x32)
+🔧 8-Bit CMOS-Based Pipelined ALU in Verilog
+📌 Project Overview
 
-This project is a complete RTL implementation of a parameter-driven, synchronous FIFO (First-In, First-Out) memory buffer in Verilog.  
-A FIFO is a fundamental building block in digital design, essential for handling data flow between modules operating at different speeds or with bursty data.
+This project implements an 8-bit Arithmetic Logic Unit (ALU) using custom CMOS logic gates and Verilog HDL, structured with a 4-stage pipelined architecture and a dual-phase clock system.
 
-This repository includes both the synthesizable RTL design and a robust, self-checking testbench to verify its functionality under various conditions.
+It is designed for hardware enthusiasts and VLSI learners, providing hands-on experience in digital logic design and transistor-level circuit implementation.
 
----
+The ALU supports fundamental arithmetic and logical operations while maintaining modularity, pipeline efficiency, and carry/borrow flag tracking.
 
-## ⚙️ Core Features
+⚙️ Features
+| 🔢 Feature        | 📝 Description                                                        |
+| ----------------- | --------------------------------------------------------------------- |
+| 8 Operations      | ADD, SUB, AND, OR, XOR, NOT A, NOT B, INC A                           |
+| ⏱️ Pipeline       | 4-stage pipelined architecture for overlapped execution               |
+| 🔄 Clocking       | Dual-phase clocks (clk1, clk2) for safe timing and no race conditions |
+| 🧠 CMOS Logic     | Built entirely with NAND, NOR, NOT, XOR gates                         |
+| 🗃️ Register Bank | 16 × 8-bit registers                                                  |
+| 💾 Memory         | 256 × 8-bit memory cells                                              |
+| 🚩 Flags          | Carry/Borrow tracking for arithmetic operations                       |
+| 🧩 Modular        | Clean Verilog gate-level design for easy expansion                    |
 
-- 📏 **Parameterized Design:** Easily change `fifo_width` (default: 32) and `fifo_depth` (default: 8) in the design.  
-- 🚩 **Status Flags:** Provides reliable `full` and `empty` output signals.  
-- 🧠 **Smart Pointers:** Uses the standard "extra bit" pointer comparison method for robust full/empty detection.  
-- ⏱️ **Fully Synchronous:** All read and write operations are synchronized to a single clock (`clk`).  
-- 🔄 **Asynchronous Reset:** Includes an active-low reset (`rst_n`) to initialize the FIFO to its empty state.
+🏗️ Architecture Overview
 
----
+The 4-stage pipeline operates as follows:
+| 🔢 Stage                 | 🛠️ Function                                     |
+| ------------------------ | ------------------------------------------------ |
+| 1️⃣ Fetch Stage          | Load operands A and B from the register bank     |
+| 2️⃣ Execute Stage        | Perform the selected ALU operation               |
+| 3️⃣ Register Write Stage | Write the result to the destination register     |
+| 4️⃣ Memory Write Stage   | Store result in memory if write-enable is active |
 
-## ▶️ How to Run the Simulation
+🛠️ Tools Used
+| 🧰 Tool        | 📝 Purpose                                 |
+| -------------- | ------------------------------------------ |
+| Verilog HDL    | Design and modeling of digital hardware    |
+| Icarus Verilog | Compilation and simulation of Verilog code |
+| GTKWave        | Waveform visualization and signal analysis |
 
-This project can be compiled and run from any standard terminal using **Icarus Verilog**.
+📤 Output Signals
+| 🟢 Signal    | 📝 Description                                            |
+| ------------ | --------------------------------------------------------- |
+| Zout         | 8-bit result of ALU operation                             |
+| Carry/Borrow | 1-bit flag indicating carry-out (ADD/INC) or borrow (SUB) |
 
-```bash
-# 1. Compile the design and testbench
-#    (We must include the rtl/ and tb/ paths)
-iverilog -o result rtl/sync_fifo_8x32.v tb/sync_fifo_8x32_tb.v
+📂 File Descriptions
+| 📄 File Name | 📝 Description                                                        |
+| ------------ | --------------------------------------------------------------------- |
+| ALU.v        | Main Verilog file containing ALU logic, pipeline stages, and datapath |
+| ALU_tb.v     | Testbench simulating ALU operations with dual clocks                  |
+| ALU.vcd      | Value Change Dump (VCD) file for waveform analysis in GTKWave         |
+| result       | Text output file capturing Zout and Carry/Borrow from simulation      |
+| README.md    | Project overview, architecture, tool usage, and file documentation    |
 
-# 2. Run the compiled simulation
-vvp result
-
-# 3. View the generated waveform
-
+⚡ Simulation and Verification
 ```
-| File Path                  | Description                                               |
-| -------------------------- | --------------------------------------------------------- |
-| `rtl/sync_fifo_8x32.v`     | The Verilog RTL design file for the FIFO.                 |
-| `tb/sync_fifo_8x32_tb.v`   | The self-checking testbench used for verification.        |
-| `images/fifo_waveform.png` | A sample waveform screenshot showing the full/empty test. |
-| `README.md`                | You are reading it!                                       |
+1.Compile the Verilog code using Icarus Verilog
+iverilog -o ALU_tb ALU.v ALU_tb.v
+2.Run the simulation
+vvp ALU_tb
+3.View waveforms in GTKWave
+4.Check the result file for Zout and Carry/Borrow outputs
+```
+📝 Key Notes
 
-📈 Verification & Waveform
+⚡ Pipeline ensures high throughput, but requires dual-phase clocks for proper timing.
 
-The self-checking testbench (sync_fifo_8x32_tb.v) automatically verifies the FIFO's behavior by running through three key scenarios:
+🧠 CMOS gate-level design provides a strong foundation for transistor-level digital design.
 
-Full Test: Writes to the FIFO until the full flag asserts, then attempts one more "overflow" write (which should be ignored).
-
-Empty Test: Reads from the FIFO until the empty flag asserts, then attempts one more "underflow" read (which should be ignored).
-
-Simultaneous R/W Test: Runs a loop of simultaneous reads and writes to test data integrity.
-| Tool               | Purpose                                                    |
-| ------------------ | ---------------------------------------------------------- |
-| **Verilog HDL**    | Designing and modeling the digital hardware.               |
-| **Icarus Verilog** | Compiling and simulating the Verilog code.                 |
-| **GTKWave**        | Viewing the output waveforms (`.vcd`) for visual analysis. |
-
-
-
-
-
-
-
+🧩 Modular structure allows future expansion of operations, register bank, and memory.
