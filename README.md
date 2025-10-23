@@ -38,6 +38,7 @@ vvp result
 | `tb/sync_fifo_8x32_tb.v`   | The self-checking testbench used for verification.        |
 | `images/fifo_waveform.png` | A sample waveform screenshot showing the full/empty test. |
 | `README.md`                | You are reading it!                                       |
+
 📈 Verification & Waveform
 
 The self-checking testbench (sync_fifo_8x32_tb.v) automatically verifies the FIFO's behavior by running through three key scenarios:
@@ -54,6 +55,7 @@ Simultaneous R/W Test: Runs a loop of simultaneous reads and writes to test data
 | **GTKWave**        | Viewing the output waveforms (`.vcd`) for visual analysis. |
 
 gtkwave sync_fifo_8x32.vcd
+
 
 
 
