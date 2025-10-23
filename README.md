@@ -8,7 +8,7 @@ It is designed for hardware enthusiasts and VLSI learners, providing hands-on ex
 
 The ALU supports fundamental arithmetic and logical operations while maintaining modularity, pipeline efficiency, and carry/borrow flag tracking.
 
-⚙️ Features
+###⚙️ Features
 | 🔢 Feature        | 📝 Description                                                        |
 | ----------------- | --------------------------------------------------------------------- |
 | 8 Operations      | ADD, SUB, AND, OR, XOR, NOT A, NOT B, INC A                           |
@@ -68,5 +68,6 @@ vvp ALU_tb
 🧠 CMOS gate-level design provides a strong foundation for transistor-level digital design.
 
 🧩 Modular structure allows future expansion of operations, register bank, and memory.
+
 
 
