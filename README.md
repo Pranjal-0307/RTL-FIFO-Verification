@@ -23,7 +23,7 @@ This project can be compiled and run from any standard terminal using **Icarus V
 
 ```bash
 # 1. Compile the design and testbench
-# iverilog -o result sync_fifo_8x32.v sync_fifo_8x32_tb.v
+iverilog -o result sync_fifo_8x32.v sync_fifo_8x32_tb.v
 
 # 2. Run the compiled simulation
 vvp result
@@ -54,6 +54,7 @@ Simultaneous R/W Test: Runs a loop of simultaneous reads and writes to test data
 | **Verilog HDL**    | Designing and modeling the digital hardware.               |
 | **Icarus Verilog** | Compiling and simulating the Verilog code.                 |
 | **GTKWave**        | Viewing the output waveforms (`.vcd`) for visual analysis. |
+
 
 
 
