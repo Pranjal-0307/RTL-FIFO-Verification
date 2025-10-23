@@ -54,7 +54,8 @@ Simultaneous R/W Test: Runs a loop of simultaneous reads and writes to test data
 | **Icarus Verilog** | Compiling and simulating the Verilog code.                 |
 | **GTKWave**        | Viewing the output waveforms (`.vcd`) for visual analysis. |
 
-gtkwave sync_fifo_8x32.vcd
+
+
 
 
 
