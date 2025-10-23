@@ -30,4 +30,25 @@ iverilog -o result rtl/sync_fifo_8x32.v tb/sync_fifo_8x32_tb.v
 vvp result
 
 # 3. View the generated waveform
+| File Path                  | Description                                               |
+| -------------------------- | --------------------------------------------------------- |
+| `rtl/sync_fifo_8x32.v`     | The Verilog RTL design file for the FIFO.                 |
+| `tb/sync_fifo_8x32_tb.v`   | The self-checking testbench used for verification.        |
+| `images/fifo_waveform.png` | A sample waveform screenshot showing the full/empty test. |
+| `README.md`                | You are reading it!                                       |
+📈 Verification & Waveform
+
+The self-checking testbench (sync_fifo_8x32_tb.v) automatically verifies the FIFO's behavior by running through three key scenarios:
+
+Full Test: Writes to the FIFO until the full flag asserts, then attempts one more "overflow" write (which should be ignored).
+
+Empty Test: Reads from the FIFO until the empty flag asserts, then attempts one more "underflow" read (which should be ignored).
+
+Simultaneous R/W Test: Runs a loop of simultaneous reads and writes to test data integrity.
+| Tool               | Purpose                                                    |
+| ------------------ | ---------------------------------------------------------- |
+| **Verilog HDL**    | Designing and modeling the digital hardware.               |
+| **Icarus Verilog** | Compiling and simulating the Verilog code.                 |
+| **GTKWave**        | Viewing the output waveforms (`.vcd`) for visual analysis. |
+
 gtkwave sync_fifo_8x32.vcd
